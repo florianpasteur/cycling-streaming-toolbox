@@ -6,7 +6,7 @@ const stick = new Ant.GarminStick3();
 
 const hrScanner = new Ant.HeartRateScanner(stick);
 hrScanner.on('hbData', data => {
-    axios.post('http://localhost:3000/sensor/hrm', {data})
+    axios.post(process.env.ANT_SERVER_ADDRESS + '/sensor/hrm', {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
@@ -19,14 +19,14 @@ fitnessEquipmentScanner.on('fitnessData', data => {
 
 const speedScanner = new Ant.SpeedScanner(stick);
 speedScanner.on('speedData', data => {
-    axios.post('http://localhost:3000/sensor/speed', {data})
+    axios.post(process.env.ANT_SERVER_ADDRESS + '/sensor/speed', {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
 
 const cadenceScanner = new Ant.CadenceScanner(stick);
 cadenceScanner.on('cadenceData', data => {
-    axios.post('http://localhost:3000/sensor/cadence', {data})
+    axios.post(`${process.env.ANT_SERVER_ADDRESS}/sensor/cadence`, {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
