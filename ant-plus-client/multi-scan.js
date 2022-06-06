@@ -5,6 +5,9 @@ const axios = require('axios');
 const stick = new Ant.GarminStick3();
 
 const hrScanner = new Ant.HeartRateScanner(stick);
+
+console.dir(process.argv);
+
 hrScanner.on('hbData', data => {
     axios.post(process.argv[3] + '/sensor/hrm', {data})
     console.log(`id: ${data.DeviceID}`);
