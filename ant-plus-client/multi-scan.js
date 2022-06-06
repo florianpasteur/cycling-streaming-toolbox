@@ -9,7 +9,7 @@ const hrScanner = new Ant.HeartRateScanner(stick);
 console.dir(process.argv);
 
 hrScanner.on('hbData', data => {
-    axios.post(process.argv[3] + '/sensor/hrm', {data})
+    axios.post(process.argv[2] + '/sensor/hrm', {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
@@ -22,14 +22,14 @@ fitnessEquipmentScanner.on('fitnessData', data => {
 
 const speedScanner = new Ant.SpeedScanner(stick);
 speedScanner.on('speedData', data => {
-    axios.post(process.argv[3] + '/sensor/speed', {data})
+    axios.post(process.argv[2] + '/sensor/speed', {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
 
 const cadenceScanner = new Ant.CadenceScanner(stick);
 cadenceScanner.on('cadenceData', data => {
-    axios.post(`${process.argv[3]}/sensor/cadence`, {data})
+    axios.post(`${process.argv[2]}/sensor/cadence`, {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
