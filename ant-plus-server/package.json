@@ -1,16 +1,14 @@
 {
-  "name": "ant-plus-reader",
+  "name": "ant-plus-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Florian PASTEUR",
   "license": "ISC",
   "dependencies": {
-    "ant-plus": "^0.1.24",
-    "axios": "^0.26.1",
-    "gd-ant-plus": "0.0.34"
+    "express": "^4.17.3"
   }
 }

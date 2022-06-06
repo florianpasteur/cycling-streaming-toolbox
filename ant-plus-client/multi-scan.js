@@ -1,26 +1,15 @@
 'use strict';
 
 const Ant = require('ant-plus');
+const axios = require('axios');
 const stick = new Ant.GarminStick3();
 
 const hrScanner = new Ant.HeartRateScanner(stick);
 hrScanner.on('hbData', data => {
+    axios.post('http://localhost:3000/sensor/hrm', {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
-hrScanner.on('attached', () => {
-    speedCadenceScanner.scan();
-    speedScanner.scan();
-    cadenceScanner.scan();
-    fitnessEquipmentScanner.scan();
-   // environmentScanner.scan();
-});
-
-// const environmentScanner = new Ant.EnvironmentScanner(stick);
-// environmentScanner.on('envData', data => {
-//     console.log(`id: ${data.DeviceID}`);
-//     console.dir(data);
-// });
 
 const fitnessEquipmentScanner = new Ant.FitnessEquipmentScanner(stick);
 fitnessEquipmentScanner.on('fitnessData', data => {
@@ -28,24 +17,16 @@ fitnessEquipmentScanner.on('fitnessData', data => {
     console.dir(data);
 });
 
-const speedCadenceScanner = new Ant.SpeedCadenceScanner(stick);
-speedCadenceScanner.on('speedData', data => {
-    console.log(`id: ${data.DeviceID}`);
-    console.dir(data);
-});
-speedCadenceScanner.on('cadenceData', data => {
-    console.log(`id: ${data.DeviceID}`);
-    console.dir(data);
-});
-
 const speedScanner = new Ant.SpeedScanner(stick);
 speedScanner.on('speedData', data => {
+    axios.post('http://localhost:3000/sensor/speed', {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
 
 const cadenceScanner = new Ant.CadenceScanner(stick);
 cadenceScanner.on('cadenceData', data => {
+    axios.post('http://localhost:3000/sensor/cadence', {data})
     console.log(`id: ${data.DeviceID}`);
     console.dir(data);
 });
@@ -54,6 +35,9 @@ cadenceScanner.on('cadenceData', data => {
 stick.on('startup', function() {
     console.log('startup');
     hrScanner.scan();
+    speedScanner.scan();
+    cadenceScanner.scan();
+    fitnessEquipmentScanner.scan();
 });
 
 if (!stick.open()) {
